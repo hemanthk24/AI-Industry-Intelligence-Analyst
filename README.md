@@ -68,7 +68,7 @@ ai_industry_intelligence_analyst/
 ├── .env                    # API keys (Configuration)
 ├── pyproject.toml          # Dependency management (uv)
 └── README.md
-
+```
 
 ## Technologies Used
 - Python 3.10+

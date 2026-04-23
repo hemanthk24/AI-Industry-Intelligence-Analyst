@@ -137,3 +137,7 @@ uv run streamlit run app.py
 
 ## Conclusion
 This project demonstrates a practical implementation of Agentic AI and MCP concepts. By moving beyond simple prompting and into dynamic tool orchestration, it provides a powerful way to navigate the rapidly evolving AI landscape.
+
+## Live Demo
+Access the deployed application here:  
+https://ai-industry-intelligence-analyst.streamlit.app/

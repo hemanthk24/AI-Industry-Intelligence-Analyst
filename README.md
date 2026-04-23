@@ -32,27 +32,39 @@ This project addresses this by building an intelligent agent that:
 
 ```mermaid
 graph TD
-    User((User Query)) --> LLM[LLM Agent Controller]
+    User((User Query)) --> UI[Streamlit Chat Interface]
+    UI --> LLM[LLM Agent Controller]
     LLM --> Tools{Tool Selection}
-    Tools --> GH[GitHub Fetcher]
-    Tools --> AX[arXiv Fetcher]
+    
+    subgraph External_Tools [MCP-Style Tools]
+        Tools --> GH[GitHub Fetcher]
+        Tools --> AX[arXiv Fetcher]
+        Tools --> SH[Search Tool]
+    end
+
     GH --> Data[(Data Retrieval)]
     AX --> Data
+    SH --> Data
+    
     Data --> LLM_Response[LLM Synthesis]
-    LLM_Response --> UI[Streamlit Chat Interface]
-```
+    LLM_Response --> UI
 
 ## Project Structure
 
-ai_newsletter/
+## Project Structure
+
+```text
+ai_industry_intelligence_analyst/
 │
 ├── app.py                  # Streamlit chatbot UI
 ├── agent.py                # Core agent logic and tool handling
 ├── tools.py                # Tool definitions (MCP-style abstraction)
+├── server.py               # Tool server / Search integration logic
 │
 ├── src/
 │   ├── github_fetcher.py   # GitHub API integration
-│   └── arxiv_fetcher.py    # arXiv API integration
+│   ├── arxiv_fetcher.py    # arXiv API integration
+│   └── search_tool.py      # Web search integration
 │
 ├── .env                    # API keys (Configuration)
 ├── pyproject.toml          # Dependency management (uv)

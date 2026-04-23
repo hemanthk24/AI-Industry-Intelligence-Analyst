@@ -48,8 +48,7 @@ graph TD
     
     Data --> LLM_Response[LLM Synthesis]
     LLM_Response --> UI
-
-## Project Structure
+```
 
 ## Project Structure
 

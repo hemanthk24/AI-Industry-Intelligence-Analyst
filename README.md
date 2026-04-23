@@ -86,32 +86,25 @@ git clone [https://github.com/hemanthk24/AI-Industry-Intelligence-Analyst.git](h
 cd AI-Industry-Intelligence-Analyst
 ```
 
-Here is that specific section formatted in clean, standard Markdown for your README.md:
-
-Markdown
-## Installation and Setup
-
-### 1. Clone the Repository
-```bash
-git clone [https://github.com/hemanthk24/AI-Industry-Intelligence-Analyst.git](https://github.com/hemanthk24/AI-Industry-Intelligence-Analyst.git)
-cd AI-Industry-Intelligence-Analyst
-2. Install Dependencies
+### 2. Install Dependencies
 This project uses uv for lightning-fast dependency management.
-```
+
 ```Bash
 uv sync
+
 ```
-3. Configure Environment Variables
-```
-Create a .env file in the root directory and add your OpenAI API key:
-```
+### 3. Configure Environment Variables
+
+- Create a .env file in the root directory and add your OpenAI API key:
+
 ```Code snippet
 OPENAI_API_KEY=your_api_key_here
 ```
-4. Run the Application
+### 4. Run the Application
 ```Bash
 uv run streamlit run app.py
 ```
+
 ## Usage
 - Open the Streamlit URL provided in your terminal (usually http://localhost:8501).
 

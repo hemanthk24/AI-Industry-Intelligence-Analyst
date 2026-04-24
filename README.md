@@ -1,30 +1,66 @@
 # AI Industry Intelligence Analyst
 
-## Overview
-**AI Industry Intelligence Analyst** is an agentic AI system designed to analyze and summarize the latest developments in artificial intelligence and machine learning. The system integrates real-time data from **GitHub repositories** and **arXiv research papers**, using a Large Language Model (LLM) to generate structured, human-readable insights.
+---
 
-Unlike traditional applications, this project follows an **agent-based architecture** where the model dynamically decides which tools to use, enabling adaptive and context-aware responses.
+## Overview
+**AI Industry Intelligence Analyst** is a production-style **LLM-powered intelligent agent** that analyzes and summarizes real-time developments in Artificial Intelligence.
+
+The system integrates live data from:
+- **GitHub repositories**
+- **arXiv research papers**
+- **Web search (real-time news)**
+
+It dynamically selects the appropriate data source using **LLM-based tool orchestration**, generating structured and human-readable insights.
 
 ---
 
 ## Problem Statement
-With the rapid growth of AI research and open-source development, it has become increasingly difficult to stay updated. Information is scattered across various platforms, making manual tracking inefficient. 
+The AI ecosystem evolves rapidly, with valuable information scattered across research papers, open-source repositories, and online sources.
 
-This project addresses this by building an intelligent agent that:
-* **Aggregates** data from multiple live sources.
-* **Filters and organizes** relevant information.
-* **Generates** concise, newsletter-style insights for users.
+Tracking this manually is:
+- Time-consuming  
+- Inefficient  
+- Fragmented  
+
+This project solves the problem by building an intelligent system that:
+
+- Aggregates real-time data from multiple sources  
+- Filters and prioritizes relevant information  
+- Generates concise, structured insights  
+- Enables conversational exploration of AI trends  
+
+---
+
+## Business Objective
+- Build a unified platform for real-time AI insights  
+- Reduce manual effort in tracking AI developments  
+- Deliver structured and actionable intelligence  
+- Enable intelligent interaction with live data  
 
 ---
 
 ## Key Features
 
-* **Agentic AI Architecture:** The LLM acts as the central brain, determining when to call external tools and how to synthesize their outputs.
-* **MCP-Style Tool Integration:** Simulates Model Context Protocol (MCP) behavior by exposing local Python functions as tools via dynamic function calling.
-* **Multi-Source Integration:** * **GitHub:** Fetches trending or recent AI/ML repositories.
-    * **arXiv:** Retrieves the latest research papers and abstracts.
-* **Conversational Interface:** Built with **Streamlit**, allowing users to interact naturally and ask follow-up questions.
-* **Context Awareness:** The agent maintains conversation history for a continuous dialogue experience.
+- **LLM Tool-Orchestrated Agent**  
+  Dynamically selects tools based on user intent  
+
+- **Multi-Source Integration**
+  - GitHub → latest AI repositories  
+  - arXiv → latest research papers  
+  - Web Search → real-time AI news  
+
+- **Real-Time Data Processing**  
+  Fetches and processes live data on demand  
+
+- **Conversational Interface**  
+  Built with Streamlit for interactive querying  
+
+- **Context-Aware Responses**  
+  Maintains session-based memory  
+
+- **Optimized Performance**
+  - Caching (LRU Cache)  
+  - Reduced API calls  
 
 ---
 
@@ -32,112 +68,109 @@ This project addresses this by building an intelligent agent that:
 
 ```mermaid
 graph TD
-    User((User Query)) --> UI[Streamlit Chat Interface]
-    UI --> LLM[LLM Agent Controller]
-    LLM --> Tools{Tool Selection}
-    
-    subgraph External_Tools [MCP-Style Tools]
-        Tools --> GH[GitHub Fetcher]
-        Tools --> AX[arXiv Fetcher]
-        Tools --> SH[Search Tool]
-    end
+    User((User Query)) --> UI[Streamlit UI]
+    UI --> Agent[LLM Agent]
 
-    GH --> Data[(Data Retrieval)]
+    Agent --> Decision{Tool Selection}
+
+    Decision --> GH[GitHub API]
+    Decision --> AX[arXiv API]
+    Decision --> WS[Web Search API]
+
+    GH --> Data[(Data)]
     AX --> Data
-    SH --> Data
-    
-    Data --> LLM_Response[LLM Synthesis]
-    LLM_Response --> UI
+    WS --> Data
+
+    Data --> LLM[LLM Processing]
+    LLM --> Response[Structured Output]
+    Response --> UI
 ```
-
-## Project Structure
-
-```text
+## 📂 Project Structure
+```
 ai_industry_intelligence_analyst/
 │
-├── app.py                  # Streamlit chatbot UI
-├── agent.py                # Core agent logic and tool handling
-├── tools.py                # Tool definitions (MCP-style abstraction)
-├── server.py               # Tool server / Search integration logic
+├── main.py                 # Streamlit UI
+├── agent.py                # Core agent logic
+├── tools.py                # Tool integration layer
 │
 ├── src/
 │   ├── github_fetcher.py   # GitHub API integration
 │   ├── arxiv_fetcher.py    # arXiv API integration
-│   └── search_tool.py      # Web search integration
+│   └── search_server.py    # Web search (Tavily)
 │
-├── .env                    # API keys (Configuration)
-├── pyproject.toml          # Dependency management (uv)
+├── .env                    # API keys
+├── pyproject.toml          # Dependencies
 └── README.md
 ```
 
 ## Technologies Used
+
 - Python 3.10+
-- Streamlit (UI Framework)
-- OpenAI API (LLM & Function Calling)
+- Streamlit (UI)
+- OpenAI API (LLM + tool calling)
 - GitHub REST API
 - arXiv API
-- uv (Fast Python package manager)
+- Tavily Search API
+- uv (package manager)
 
-## Installation and Setup
+## Installation & Setup
 
-### 1. Clone the Repository
-```bash
-git clone [https://github.com/hemanthk24/AI-Industry-Intelligence-Analyst.git](https://github.com/hemanthk24/AI-Industry-Intelligence-Analyst.git)
+**1. Clone the Repository**
+```
+git clone https://github.com/hemanthk24/AI-Industry-Intelligence-Analyst.git
 cd AI-Industry-Intelligence-Analyst
 ```
-
-### 2. Install Dependencies
-This project uses uv for lightning-fast dependency management.
-
-```Bash
+**2. Install Dependencies**
+```     
 uv sync
-
 ```
-### 3. Configure Environment Variables
+**3. Setup Environment Variables**
 
-- Create a .env file in the root directory and add your OpenAI API key:
-
-```Code snippet
+Create a ``.env``` file:
+```
 OPENAI_API_KEY=your_api_key_here
+TAVILY_API_KEY=your_api_key_here
 ```
-### 4. Run the Application
-```Bash
-uv run streamlit run app.py
+**4. Run the Application**
+```bash
+uv run streamlit run main.py
 ```
 
 ## Usage
-- Open the Streamlit URL provided in your terminal (usually http://localhost:8501).
 
-- Interact with the agent using natural language:
+**Ask questions like:**
 
-- "What are the latest AI trends on GitHub?"
-
-- "Create a newsletter based on today's machine learning papers."
-
-- "Explain the recent breakthroughs in LLM research."
+- "Latest AI news today"
+- "Recent machine learning research papers"
+- "Trending AI GitHub repositories"
+- "Explain latest LLM advancements"
 
 ## How It Works
-- **Intent Analysis:** The LLM parses the user's prompt to see if it needs external data.
-
-- **Tool Execution:** If required, the LLM triggers get_github_data or get_arxiv_data.
-
-- **Synthesis:** The LLM receives the raw JSON/data from the tools and transforms it into a structured, user-friendly format (Markdown tables, bullet points, etc.).
-
-- **Multi-Tool Handling:** The agent can call multiple tools in a single turn if the query requires data from both GitHub and arXiv.
+- User Query → Input via Streamlit UI
+- LLM Decision → Determines if tools are needed
+- Tool Execution → Calls APIs (GitHub, arXiv, Web)
+- Data Retrieval → Fetches real-time information
+- LLM Processing → Summarizes and structures output
+- Final Response → Displayed to user
 
 ## Future Improvements
-
-- **Enhanced Filtering:** Implementing better ranking logic for GitHub repositories.
-
-- **Persistent Memory:** Adding a database (like SQLite or ChromaDB) to store historical insights.
-
-- **Expanded Sources:** Integrating News APIs, X (Twitter) tech trends, and Hugging Face.
-
-- **Caching:** Reducing API latency and costs by caching frequent queries.
+- Redis-based caching (production-level optimization)
+- Advanced ranking of repositories and papers
+- Integration with Hugging Face & research datasets
+- Streaming responses (real-time typing effect)
+- Improved UI (ChatGPT-style interface)
 
 ## Conclusion
-This project demonstrates a practical implementation of Agentic AI and MCP concepts. By moving beyond simple prompting and into dynamic tool orchestration, it provides a powerful way to navigate the rapidly evolving AI landscape.
 
-## Live Demo
-Access the deployed application here:  
+This project demonstrates a real-world implementation of LLM-based tool orchestration, enabling dynamic data retrieval and intelligent summarization.
+
+It showcases:
+
+- System design thinking
+- API integration
+- Agent-based architecture
+- Real-time AI intelligence generation
+
+## 🌐 Live Demo
+
 https://ai-industry-intelligence-analyst.streamlit.app/

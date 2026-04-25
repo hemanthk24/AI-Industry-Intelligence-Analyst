@@ -1,0 +1,5 @@
+Response Quality Evaluation:
+['Relevance: 3  \nClarity: 4  \nCompleteness: 2',
+ 'Relevance: 5  \nClarity: 5  \nCompleteness: 4', 
+ 'Relevance: 3  \nClarity: 4  \nCompleteness: 2', 
+ 'Relevance: 5  \nClarity: 4  \nCompleteness: 5']

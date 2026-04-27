@@ -30,7 +30,7 @@ def evaluate_tool_selection():
     correct = 0
     total = len(test_queries)
 
-    print("\n🔍 Tool Selection Evaluation\n")
+    print("\n Tool Selection Evaluation\n")
 
     for item in test_queries:
         query = item["query"]
@@ -57,7 +57,7 @@ def evaluate_tool_selection():
         print(f"Expected: {expected} | Actual: {actual} | {result}\n")
 
     accuracy = correct / total * 100
-    print(f"🎯 Tool Selection Accuracy: {accuracy:.2f}%\n")
+    print(f"Tool Selection Accuracy: {accuracy:.2f}%\n")
     return accuracy
 
 
@@ -85,7 +85,7 @@ def evaluate_latency():
 
 # 3. RESPONSE QUALITY (LLM JUDGE)
 def evaluate_response_quality():
-    print("\n🧠 Response Quality Evaluation\n")
+    print("\n Response Quality Evaluation\n")
     
     evaluations = []
 
